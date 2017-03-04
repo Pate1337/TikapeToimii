@@ -9,24 +9,35 @@ and open the template in the editor.
     <head>
         <title th:text="${alue.otsikko}">TODO supply a title</title>
         <meta charset="UTF-8"/>
-        
+                <style>
+            body {
+                background: black;
+                color: red;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+            </style>
     </head>
     <body>
-        <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
-        <div>Tämä on tietyn alueen keskusteluikkuna, <b>sisäänkirjautuneille</b></div>
-        <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span></p>
+        <p th:text="'Olet kirjautunut sisään tunnuksella: '+${kayttaja.tunnus}">Kayttajatunnus</p>
+        <a href="/logout">Kirjaudu ulos</a>
+        <br/><br/>
+<!--        <div>Tämä on tietyn alueen keskusteluikkuna, <b>sisäänkirjautuneille</b></div>-->
+<p>Alue: <b><span th:text="${alue.otsikko}">alueen nimi</span></b></p><br/>
+Alueen keskustelut:<br/>
         <ul>
             <li th:each="keskustelu : ${alueenKeskustelut}">
                 <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/keskustelut/{keskusteluid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
             </li>
         </ul>
-        <p>Tänne mahdollisuus lisätä uusi keskustelu HUOM tämä on käyttäjätunnuksen omistavalle</p>
+<!--  <p>Tänne mahdollisuus lisätä uusi keskustelu HUOM tämä on käyttäjätunnuksen omistavalle</p> -->
+        
         <form method="POST" th:action="@{~/luokeskustelu/{kayttajaid}/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}">
-            Aloita uusi keskustelu:<br/>
+            <br/>Aloita uusi keskustelu:<br/>
             <input type="text" name="keskusteluNimi"/><br/>
             
             <input type="submit" value="Lisää!"/>            
         </form>
+        <br/>
         <a th:href="@{~/s/users/{kayttajaid}/(kayttajaid=${kayttaja.id})}">Takaisin aluelistaukseen</a>
     </body>
 </html>

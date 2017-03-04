@@ -4,6 +4,13 @@
     <head>
         <title>Ryhmä Huttusen huikea foorumi</title>
         <meta charset="utf-8" />
+                        <style>
+            body {
+                background: black;
+                color: red;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+            </style>
     </head>
 
     <body>
@@ -11,8 +18,10 @@
         
         
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
-        
-        <p>aluekentät (vedä hiiri päälle niin tapahtuu eeppisyyttä;))</p>
+        <br/><br/>
+        (voit lis&auml;t&auml; foorumille uusia aihealueita, keskusteluja tai viestij&auml; vain jos olet kirjautunut)
+        <br/><br/>
+        <p>Valitse aihealue alta (vedä hiiri päälle niin tapahtuu eeppisyyttä;)):</p>
         <ul>
             <li th:each="alue : ${alueet}">
                 <a th:href="@{~/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen otsikko</span></a>

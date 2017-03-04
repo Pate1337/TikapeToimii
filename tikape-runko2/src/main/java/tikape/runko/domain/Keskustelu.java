@@ -17,7 +17,7 @@ public class Keskustelu {
     private int alueID;
     private Timestamp uusinViesti;
     
-    public Keskustelu(int id, String otsikko, int alueID, Timestamp uusinVTimestamp) {
+    public Keskustelu(int id, String otsikko, int alueID) {
         this.id = id;
         this.otsikko = otsikko;
         this.alueID = alueID;

@@ -43,16 +43,16 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
         String otsikko = rs.getString("otsikko");
         int alueID = rs.getInt("alue_id");
         
-        ResultSet viestit = connection.createStatement().executeQuery("SELECT aika FROM viesti WHERE keskustelu_id = " + Integer.toString(key) + " ORDER BY aika ASC LIMIT 1");
+//        ResultSet viestit = connection.createStatement().executeQuery("SELECT aika FROM viesti WHERE keskustelu_id = " + Integer.toString(key) + " ORDER BY aika ASC LIMIT 1");
+//        
+//        Timestamp uusin = Timestamp.valueOf(viestit.getString("aika"));
         
-        Timestamp uusin = Timestamp.valueOf(viestit.getString("aika"));
-        
-        viestit.close();
+//        viestit.close();
         rs.close();
         stmt.close();
         connection.close();
         
-        return new Keskustelu(id, otsikko, alueID, uusin);
+        return new Keskustelu(id, otsikko, alueID);
     }
 
     @Override
@@ -79,14 +79,14 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
             String otsikko = rs.getString("otsikko");
             int alueID = rs.getInt("alue_id");
             
-            stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE keskustelu_id = ? ORDER BY aika Asc LIMIT 1");
-            stmt.setInt(1, keskusteluID);
-            ResultSet aika = stmt.executeQuery();
-            Timestamp uusinViesti = Timestamp.valueOf(aika.getString("aika"));
-
-            aika.close();
+//            stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE keskustelu_id = ? ORDER BY aika Asc LIMIT 1");
+//            stmt.setInt(1, keskusteluID);
+//            ResultSet aika = stmt.executeQuery();
+//            Timestamp uusinViesti = Timestamp.valueOf(aika.getString("aika"));
+//
+//            aika.close();
             
-            keskustelut.add(new Keskustelu(keskusteluID, otsikko, alueID, uusinViesti));
+            keskustelut.add(new Keskustelu(keskusteluID, otsikko, alueID));
         }
 
         rs.close();

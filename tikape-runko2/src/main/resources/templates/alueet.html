@@ -15,9 +15,10 @@ and open the template in the editor.
         <div>Tämä on tietyn alueen keskusteluikkuna, <b>ilman sisäänkirjautumista</b></div>
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
         <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span></p>
+        
         <ul>
             <li th:each="keskustelu : ${alueenKeskustelut}">
-                <a th:href="@{~/alueet/{alueid}/keskustelut/{keskusteluid}/(alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a>
+                <p><a th:href="@{~/alueet/{alueid}/keskustelut/{keskusteluid}/(alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a><span>Viestejä yhteensä</span></p>
             </li>
         </ul>
         <p>Tänne ei keskustelun lisäys mahdollisuutta, koska ei sisäänkirjautunut</p>

@@ -61,6 +61,18 @@ public class AlueDao implements Dao<Alue, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public void luoAlue(String otsikko, String kuvaus) throws SQLException {
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Alue(otsikko, kuvaus) VALUES (?, ?)");
+        stmt.setObject(1, otsikko);
+        stmt.setObject(2, kuvaus);
+        
+
+        stmt.execute();
+        
+        stmt.close();
+        connection.close();
+    }
     
     
 }

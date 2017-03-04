@@ -182,6 +182,17 @@ public class Main {
             res.redirect("/s/users/" + kayttajaID + "/alueet/" + alueID + "/");
             return "";
         });
+        
+        post("/luoalue/:kayttajaid/", (req, res) -> {
+            HashMap map = new HashMap<>();
+            String keskusteluNimi = req.queryParams("alueenNimi");
+            String kuvaus = req.queryParams("kuvaus");
+            int kayttajaID = Integer.parseInt(req.params(":kayttajaid"));
+            
+            alueDao.luoAlue(keskusteluNimi, kuvaus);
+            res.redirect("/s/users/" + kayttajaID + "/");
+            return "";
+        });
  
     }
 }

@@ -22,5 +22,12 @@ and open the template in the editor.
                 <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen nimi</span></a>
             </li>
         </ul>
+        <form method="POST" th:action="@{~/luoalue/{kayttajaid}/(kayttajaid=${kayttaja.id})}">
+            Aloita uusi alue: <br/>
+            <input type="text" name="alueenNimi"/><br/>
+            Lisää alueelle kuvaus: <br/>
+            <input type="text" name="kuvaus"/><br/>
+            <input type="submit" value="Lisää!"/>            
+        </form>
     </body>
 </html>

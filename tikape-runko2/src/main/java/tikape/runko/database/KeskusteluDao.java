@@ -95,26 +95,36 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
         return keskustelut;
     }
     
-    public void luoKeskustelu(String otsikko, int alueId, int kayttajaId, String teksti) throws SQLException {
+    public void luoKeskustelu(String otsikko, int alueId) throws SQLException {
         Connection connection = database.getConnection();
-        int keskusteluId = connection.createStatement().executeQuery("SELECT Count(*) as uusin_id FROM Keskustelu").getInt("uusin_id");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Keskustelu(otsikko, alue_id) VALUES (?, ?)");
+        stmt.setObject(1, otsikko);
+        stmt.setObject(2, alueId);
         
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Keskustelu (id, otsikko, alue_id) VALUES (?, ?,?)");
-        stmt.setObject(1, keskusteluId);
-        stmt.setObject(2, otsikko);
-        stmt.setObject(3, alueId);
-        
+
         stmt.execute();
         
-        PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO Viesti(kayttaja_id, keskustelu_id, teksti, aika) VALUES (?,?,?,datetime())");
-        stmt2.setObject(1, kayttajaId);
-        stmt2.setObject(2, keskusteluId);
-        stmt2.setObject(3, teksti);
-        
-        stmt2.execute();
         stmt.close();
-        stmt2.close();
         connection.close();
+//        Connection connection = database.getConnection();
+//        int keskusteluId = connection.createStatement().executeQuery("SELECT Count(*) as uusin_id FROM Keskustelu").getInt("uusin_id");
+//        
+//        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Keskustelu (id, otsikko, alue_id) VALUES (?, ?,?)");
+//        stmt.setObject(1, keskusteluId);
+//        stmt.setObject(2, otsikko);
+//        stmt.setObject(3, alueId);
+//        
+//        stmt.execute();
+//        
+//        PreparedStatement stmt2 = connection.prepareStatement("INSERT INTO Viesti(kayttaja_id, keskustelu_id, teksti, aika) VALUES (?,?,?,datetime())");
+//        stmt2.setObject(1, kayttajaId);
+//        stmt2.setObject(2, keskusteluId);
+//        stmt2.setObject(3, teksti);
+//        
+//        stmt2.execute();
+//        stmt.close();
+//        stmt2.close();
+//        connection.close();
     }
     
 }

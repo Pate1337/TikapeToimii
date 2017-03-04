@@ -14,6 +14,7 @@ import tikape.runko.database.KeskusteluDao;
 import tikape.runko.database.ViestiDao;
 import tikape.runko.domain.Alue;
 import tikape.runko.domain.Kayttaja;
+import tikape.runko.domain.Keskustelu;
 
 public class Main {
 
@@ -168,6 +169,17 @@ public class Main {
             
             
             res.redirect("/s/users/" + kayttajaID + "/alueet/" + alueID + "/keskustelut/" + keskusteluID + "/");
+            return "";
+        });
+        
+        post("/luokeskustelu/:kayttajaid/:alueid/", (req, res) -> {
+            HashMap map = new HashMap<>();
+            String keskusteluNimi = req.queryParams("keskusteluNimi");
+            int kayttajaID = Integer.parseInt(req.params(":kayttajaid"));
+            int alueID = Integer.parseInt(req.params(":alueid"));
+            
+            keskusteluDao.luoKeskustelu(keskusteluNimi, alueID);
+            res.redirect("/s/users/" + kayttajaID + "/alueet/" + alueID + "/");
             return "";
         });
  

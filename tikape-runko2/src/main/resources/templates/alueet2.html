@@ -21,6 +21,12 @@ and open the template in the editor.
             </li>
         </ul>
         <p>Tänne mahdollisuus lisätä uusi keskustelu HUOM tämä on käyttäjätunnuksen omistavalle</p>
+        <form method="POST" th:action="@{~/luokeskustelu/{kayttajaid}/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}">
+            Aloita uusi keskustelu:<br/>
+            <input type="text" name="keskusteluNimi"/><br/>
+            
+            <input type="submit" value="Lisää!"/>            
+        </form>
         <a th:href="@{~/s/users/{kayttajaid}/(kayttajaid=${kayttaja.id})}">Takaisin aluelistaukseen</a>
     </body>
 </html>

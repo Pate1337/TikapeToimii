@@ -9,20 +9,28 @@ and open the template in the editor.
     <head>
         <title>Ryhmä Huttusen huikea foorumi</title>
         <meta charset="UTF-8"/>
-        
+                        <style>
+            body {
+                background: black;
+                color: red;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+            </style>
     </head>
     <body>
-        <p>Tervetuloa <span th:text="${kayttaja.nimi}">käyttäjän nimi</span></p>
-        <p th:text="${kayttaja.tunnus}">Kayttajatunnus</p><a href="/logout">Kirjaudu ulos</a>
-        <p>Tää on vielä toi etusivu, mutta ero on että nyt sisäänkirjautunut</p>
+        <p th:text="'Olet kirjautunut sisään tunnuksella: '+${kayttaja.tunnus}">Kayttajatunnus</p>
+        <a href="/logout">Kirjaudu ulos</a>
+        <br/><br/>
+<!--    <p>Tää on vielä toi etusivu, mutta ero on että nyt sisäänkirjautunut</p> -->
         
-        <p>aluekentät (vedä hiiri päälle niin tapahtuu eeppisyyttä;))</p>
+        <p>Valitse aihealue alta (vedä hiiri päälle niin tapahtuu eeppisyyttä;)):</p>
         <ul>
             <li th:each="alue : ${alueet}">
                 <p><a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen nimi</span></a> Viestien määrä: <span th:text="${alue.viestienmaara}"> Viestejä yhteensä</span> Viimeisin viesti: <span th:text="${alue.viimeisinviesti}">Viimeisin viesti aika</span></p>
             </li>
         </ul>
         <form method="POST" th:action="@{~/luoalue/{kayttajaid}/(kayttajaid=${kayttaja.id})}">
+            <br/>
             Aloita uusi alue: <br/>
             <input type="text" name="alueenNimi"/><br/>
             Lisää alueelle kuvaus: <br/>

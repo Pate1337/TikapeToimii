@@ -9,11 +9,17 @@ and open the template in the editor.
     <head>
         <title th:text="${alue.otsikko}">TODO supply a title</title>
         <meta charset="UTF-8"/>
-        
+                        <style>
+            body {
+                background: black;
+                color: red;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+            </style>
     </head>
     <body>
-        <div>Tämä on tietyn alueen keskusteluikkuna, <b>ilman sisäänkirjautumista</b></div>
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
+        <br/><br/>
         <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span></p>
         
         <ul>
@@ -21,8 +27,9 @@ and open the template in the editor.
                 <p><a th:href="@{~/alueet/{alueid}/keskustelut/{keskusteluid}/(alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a> Viestien määrä: <span th:text="${keskustelu.viestienmaara}"> Viestejä yhteensä</span> Viimeisin viesti: <span th:text="${keskustelu.viimeisinviesti}">Viimeisin viesti aika</span></p>
             </li>
         </ul>
-        <p>Tänne ei keskustelun lisäys mahdollisuutta, koska ei sisäänkirjautunut</p>
-        
+        <br/>
+        <p>Vain kirjautuneet käyttäjät voivat lisätä keskusteluja. Luo tunnus tai kirjaudu sisään ylhäältä.</p>
+        <br/>        
         <a href="/">Takaisin aluelistaukseen</a>
     </body>
 </html>

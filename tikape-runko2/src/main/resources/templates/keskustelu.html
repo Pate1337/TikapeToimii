@@ -9,19 +9,33 @@ and open the template in the editor.
     <head>
         <title th:text="${keskustelu.otsikko}">TODO supply a title</title>
         <meta charset="UTF-8"/>
-        
+        <style>
+            td {
+                border-top: solid black 1px;
+                border-bottom: solid red 1px;
+                padding: 1em;
+            }
+            body {
+                background: black;
+                color: red;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+            </style>
     </head>
     <body>
-        <div>Täällä on nyt sitten tietyn keskustelun viestit</div>
         <a href="/kirjautuminen">Kirjaudu sisään</a> tai luo itsellesi käyttäjätunnus <a href="/rekisteroidy">tästä</a>
-        <p>Ja tää on <b>ei kirjautuneelle</b></p>
-        <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span> -> <span th:text="${keskustelu.otsikko}">keskustelun nimi</span></p>
-        <ol>
-            <li th:each="viesti : ${keskustelunViestit}">
-                <span th:text="${viesti.teksti}">Viesti</span>
-            </li>
-        </ol>
-        <p>Tänne ei viestin lähettämis mahdollisuutta</p>
+        <br/><br/>
+        <p>Alue: <span th:text="${alue.otsikko}">alueen nimi</span> -> <b><span th:text="${keskustelu.otsikko}">keskustelun nimi</span></b></p>        
+        <table>
+        <th:block th:each="viesti : ${keskustelunViestit}">
+    <tr>
+        <td th:text="${viesti.teksti}">Viesti</td>
+    </tr>
+</th:block>
+        </table>
+        <br/>
+        <p>Vain kirjautuneet käyttäjät voivat lisätä keskusteluja. Luo tunnus tai kirjaudu sisään ylhäältä.</p>
+        <br/>
         <a th:href="@{~/alueet/{alueid}/(alueid=${alue.id})}">Takaisin keskusteluihin</a>
     </body>
 </html>

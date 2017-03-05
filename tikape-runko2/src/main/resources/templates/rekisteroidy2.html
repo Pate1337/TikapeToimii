@@ -17,16 +17,20 @@ and open the template in the editor.
             </style>
     </head>
     <body>
+        <h3>Luo itsellesi käyttäjätunnus</h3>
         <form method="POST" action="/luotunnus">
             Nimi:<br/>
             <input type="text" name="nimi"/><br/>
             Käyttäjätunnus:<br/>
             <input type="text" name="tunnus"/><br/>
             Salasana:<br/>
-            <input type="text" name="salasana"/><br/>
+            <input type="password" name="salasana"/><br/>
+            Salasana uudelleen:<br/>
+            <input type="password" name="salasana2"/><br/>
             <input type="submit" value="Luo tunnus!"/>            
         </form>
         <br/>
+        <p>Salasana väärin, yritä uudelleen</p><br/>
         <a href="/">Takaisin etusivulle</a>
     </body>
 </html>

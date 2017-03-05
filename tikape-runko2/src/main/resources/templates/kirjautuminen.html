@@ -10,6 +10,13 @@ and open the template in the editor.
         <title>Sisäänkirjautuminen</title>
         <meta charset="UTF-8"/>
 <!--        <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+                        <style>
+            body {
+                background: black;
+                color: red;
+                font-family: "Comic Sans MS", "Comic Sans", cursive;
+            }
+            </style>
     </head>
     <body>
         <form method="POST" action="/login">
@@ -19,7 +26,7 @@ and open the template in the editor.
             <input type="text" name="salasana"/><br/>
             <input type="submit" value="Kirjaudu sisään"/>            
         </form>
-        
+        <br/>
         <a href="/">Takaisin etusivulle</a>
     </body>
 </html>

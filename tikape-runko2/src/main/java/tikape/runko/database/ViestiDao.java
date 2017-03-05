@@ -141,10 +141,28 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         connection.close();
         return viestit;
     }
+    
+//    public int viestienMaaraKeskustelussa(int id) throws SQLException {
+//        Connection connection = database.getConnection();
+//        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) AS viestien_maara FROM Viesti WHERE keskustelu_id = ?");
+//        
+//        stmt.setInt(1, id);
+//        ResultSet rs = stmt.executeQuery();
+//        
+//        int viestienMaara = 0;
+//        while (rs.next()) {
+//            viestienMaara = rs.getInt("viestien_maara");
+//        }
+//        rs.close();
+//        stmt.close();
+//        connection.close();
+//        
+//        return viestienMaara;
+//    }
 
     public void luoViesti(int kayttajaId, int keskusteluId, String teksti) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti(kayttaja_id, keskustelu_id, teksti, aika) VALUES (?,?,?,datetime())");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti(kayttaja_id, keskustelu_id, teksti, aika) VALUES (?, ?, ?, datetime())");
         stmt.setObject(1, kayttajaId);
         stmt.setObject(2, keskusteluId);
         stmt.setObject(3, teksti);

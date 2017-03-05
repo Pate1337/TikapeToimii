@@ -15,7 +15,7 @@
         <p>aluekentät (vedä hiiri päälle niin tapahtuu eeppisyyttä;))</p>
         <ul>
             <li th:each="alue : ${alueet}">
-                <a th:href="@{~/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen otsikko</span></a>
+                <p><a th:href="@{~/alueet/{id}/(id=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen otsikko</span></a> Viestien määrä: <span th:text="${alue.viestienmaara}"> Viestejä yhteensä</span> Viimeisin viesti: <span th:text="${alue.viimeisinviesti}">Viimeisin viesti aika</span></p>
             </li>
         </ul>
 

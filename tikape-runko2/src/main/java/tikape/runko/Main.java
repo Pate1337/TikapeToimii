@@ -102,7 +102,7 @@ public class Main {
             int alueID = Integer.parseInt(req.params(":alueid"));
             map.put("kayttaja", KayttajaDao.findOne(kayttajaID));
             map.put("alue", alueDao.findOne(alueID));
-            map.put("alueenKeskustelut", keskusteluDao.etsiAlueenKeskustelut(alueID));
+            map.put("alueenKeskustelut", keskusteluDao.etsiViimeisimmat(alueID));
             return new ModelAndView(map, "alueet2");
         }, new ThymeleafTemplateEngine());
         
@@ -110,7 +110,7 @@ public class Main {
             HashMap map = new HashMap<>();
             int alueID = Integer.parseInt(req.params(":id"));
             map.put("alue", alueDao.findOne(alueID));
-            map.put("alueenKeskustelut", keskusteluDao.etsiAlueenKeskustelut(alueID));
+            map.put("alueenKeskustelut", keskusteluDao.etsiViimeisimmat(alueID));
             return new ModelAndView(map, "alueet");
         }, new ThymeleafTemplateEngine());
         
@@ -137,6 +137,8 @@ public class Main {
             HashMap map = new HashMap<>();
             int alueID = Integer.parseInt(req.params(":alueid"));
             int keskusteluID = Integer.parseInt(req.params(":keskusteluid"));
+//            int viestienMaara = viestiDao.viestienMaaraKeskustelussa(keskusteluID);
+            
             map.put("alue", alueDao.findOne(alueID));
             map.put("keskustelu", keskusteluDao.findOne(keskusteluID));
             map.put("keskustelunViestit", viestiDao.etsiKeskustelunViestit(keskusteluID));

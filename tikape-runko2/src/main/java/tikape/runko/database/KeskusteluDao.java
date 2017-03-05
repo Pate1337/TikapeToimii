@@ -22,9 +22,11 @@ import tikape.runko.domain.Keskustelu;
  */
 public class KeskusteluDao implements Dao<Keskustelu, Integer> {
     private Database database;
+//    private List<Keskustelu> keskustelut;
     
     public KeskusteluDao(Database database) {
         this.database = database;
+//        this.keskustelut = new ArrayList();
     }
     
 
@@ -52,7 +54,7 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
         stmt.close();
         connection.close();
         
-        return new Keskustelu(id, otsikko, alueID);
+        return new Keskustelu(id, otsikko, alueID, database);
     }
 
     @Override
@@ -65,11 +67,12 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public List<Keskustelu> etsiAlueenKeskustelut(int id) throws SQLException {
+    public List<Keskustelu> etsiViimeisimmat(int id) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Keskustelu WHERE alue_id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT DISTINCT id, otsikko, alue_id FROM (SELECT DISTINCT Keskustelu.id, Keskustelu.otsikko, Keskustelu.alue_id, aika FROM Keskustelu LEFT JOIN Viesti ON Keskustelu.id = Viesti.keskustelu_id WHERE Keskustelu.alue_id = ? OR (Keskustelu.alue_id = ? AND Viesti.id IS NULL) ORDER BY Viesti.aika DESC LIMIT 10);");
 
         stmt.setInt(1, id);
+        stmt.setInt(2, id);
         ResultSet rs = stmt.executeQuery();
 
         List<Keskustelu> keskustelut = new ArrayList<>();
@@ -86,8 +89,9 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
 //
 //            aika.close();
             
-            keskustelut.add(new Keskustelu(keskusteluID, otsikko, alueID));
+            keskustelut.add(new Keskustelu(keskusteluID, otsikko, alueID, database));
         }
+        
 
         rs.close();
         stmt.close();
@@ -104,8 +108,19 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
 
         stmt.execute();
         
+        //saadaan luotua uusi keskusteluolio
+//        stmt = connection.prepareStatement("SELECT * FROM Keskustelu otsikko = ? AND alue_id = ?");
+//        stmt.setObject(1, otsikko);
+//        stmt.setObject(2, alueId);
+//        ResultSet rs = stmt.executeQuery();
+//        while (rs.next()) {
+//            Keskustelu keskustelu = new Keskustelu(rs.getInt("id"), rs.getString("otsikko"), rs.getInt("alue_id"));
+//            this.keskustelut.add(keskustelu);
+//        }
+        
         stmt.close();
         connection.close();
+        
 //        Connection connection = database.getConnection();
 //        int keskusteluId = connection.createStatement().executeQuery("SELECT Count(*) as uusin_id FROM Keskustelu").getInt("uusin_id");
 //        

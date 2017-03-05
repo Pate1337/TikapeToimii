@@ -31,7 +31,7 @@ public class AlueDao implements Dao<Alue, Integer> {
         stmt.close();
         connection.close();
         
-        return new Alue(id, otsikko, kuvaus);
+        return new Alue(id, otsikko, kuvaus, database);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AlueDao implements Dao<Alue, Integer> {
             String otsikko = rs.getString("otsikko");
             String kuvaus = rs.getString("kuvaus");
 
-            alueet.add(new Alue(id, otsikko, kuvaus));
+            alueet.add(new Alue(id, otsikko, kuvaus, database));
         }
 
         rs.close();

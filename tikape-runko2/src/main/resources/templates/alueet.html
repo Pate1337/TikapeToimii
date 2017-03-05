@@ -18,7 +18,7 @@ and open the template in the editor.
         
         <ul>
             <li th:each="keskustelu : ${alueenKeskustelut}">
-                <p><a th:href="@{~/alueet/{alueid}/keskustelut/{keskusteluid}/(alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a><span> Viestejä yhteensä</span></p>
+                <p><a th:href="@{~/alueet/{alueid}/keskustelut/{keskusteluid}/(alueid=${alue.id}, keskusteluid=${keskustelu.id})}"><span th:text="${keskustelu.otsikko}">Alueet</span></a> Viestien määrä: <span th:text="${keskustelu.viestienmaara}"> Viestejä yhteensä</span> Viimeisin viesti: <span th:text="${keskustelu.viimeisinviesti}">Viimeisin viesti aika</span></p>
             </li>
         </ul>
         <p>Tänne ei keskustelun lisäys mahdollisuutta, koska ei sisäänkirjautunut</p>

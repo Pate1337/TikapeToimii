@@ -19,7 +19,7 @@ and open the template in the editor.
         <p>aluekentät (vedä hiiri päälle niin tapahtuu eeppisyyttä;))</p>
         <ul>
             <li th:each="alue : ${alueet}">
-                <a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen nimi</span></a>
+                <p><a th:href="@{~/s/users/{kayttajaid}/alueet/{alueid}/(kayttajaid=${kayttaja.id}, alueid=${alue.id})}"><span th:text="${alue.otsikko}" th:title="${alue.kuvaus}">Alueen nimi</span></a> Viestien määrä: <span th:text="${alue.viestienmaara}"> Viestejä yhteensä</span> Viimeisin viesti: <span th:text="${alue.viimeisinviesti}">Viimeisin viesti aika</span></p>
             </li>
         </ul>
         <form method="POST" th:action="@{~/luoalue/{kayttajaid}/(kayttajaid=${kayttaja.id})}">
